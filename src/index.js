@@ -363,9 +363,9 @@ module.exports = {
 
 			return this.Promise.resolve()
 				// Resolve endpoint by action name
-				.then(() => {
+				.then(async () => {
 					if (alias.action) {
-						const endpoint = this.broker.findNextActionEndpoint(alias.action);
+						const endpoint = await this.broker.findNextActionEndpoint(alias.action, { params: req.$params });
 						if (endpoint instanceof Error)
 							throw endpoint;
 
